@@ -16,3 +16,8 @@ class Form(models.Model):
     description = models.TextField(blank = True)
     created_at = models.DateTimeField(auto_now_add = True)
     fields = models.ManyToManyField(Field, related_name = 'forms')
+
+class FormLink(models.Model):
+    form = models.ForeignKey(Form, on_delete = models.CASCADE)
+    link = models.CharField(max_length = 255, unique = True)
+    created_at = models.DateTimeField(auto_now_add = True)

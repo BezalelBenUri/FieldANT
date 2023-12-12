@@ -13,7 +13,8 @@ class FormSerializer(serializers.ModelSerializer):
     """
     Serializer for Form model to convert data to JSON format, including nested Field objects.
     """
-    fields = FieldSerializer(many=True)
+    fields = FieldSerializer(many = True)
+    link = serializers.CharField(max_length = 255, read_only = True)
 
     class Meta:
         model = Form
@@ -26,3 +27,4 @@ class FormSerializer(serializers.ModelSerializer):
             field = Field.objects.create(**field_data)
             form.fields.add(field)
         return form
+    
