@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import FormListCreateView, FormFieldListCreateView
+from .views import FormCreateView
+from .views import FormRetrieveView
 
 urlpatterns = [
-    path('forms/', FormListCreateView.as_view(), name='form-list-create'),
-    path('form-fields/', FormFieldListCreateView.as_view(), name='form-field-list-create'),
+    path('forms/', FormCreateView.as_view()),
+    path('forms/<int:pk>/', FormRetrieveView.as_view()),
 ]

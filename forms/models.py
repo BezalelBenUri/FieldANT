@@ -1,16 +1,18 @@
 from django.db import models
-import uuid
-# Create your models here.
-class Form(models.Model):
-    title = models.CharField(max_length=100)
-    unique_url = models.CharField(max_length=255, unique=True, blank = True, default = str(uuid.uuid4()))
 
-class FormField(models.Model):
-    DATA_TYPES = [
-        ('number', 'Number'),
-        ('text', 'Text'),
-        ('checkbox', 'Checkbox'),
-    ]
-    form = models.ForeignKey(Form, on_delete=models.CASCADE)
-    label = models.CharField(max_length=50)
-    data_type = models.CharField(max_length=10, choices=DATA_TYPES)
+
+class Field(models.Model):
+    """
+    Model representing a field within a form with its type, label, options, and order.
+    """
+    name = models.CharField(max_length = 255)
+    data_type = models.CharField(max_length = 255, choices = (
+        ('CHAR', 'Char'), ('INTEGER', 'Integer'), ('FLOAT', 'Float'), ('BOOLEAN', 'Boolean')))
+class Form(models.Model):
+    """
+    Model representing a form with its title, unique link, and creation timestamp.
+    """
+    name = models.CharField(max_length = 255)
+    description = models.TextField(blank = True)
+    created_at = models.DateTimeField(auto_now_add = True)
+    fields = models.ManyToManyField(Field, related_name = 'forms')
