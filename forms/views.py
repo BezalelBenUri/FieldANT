@@ -1,4 +1,4 @@
-from rest_framework import views, status
+from rest_framework import views, status, generics
 from rest_framework.response import Response
 import uuid
 
@@ -42,4 +42,8 @@ class FormRetrieveView(views.APIView):
 
         serializer = FormSerializer(form)
         return Response(serializer.data, status = status.HTTP_200_OK)
+    
+class FormListView(generics.ListAPIView):
+    queryset = Form.objects.all()
+    serializer_class = FormSerializer
 

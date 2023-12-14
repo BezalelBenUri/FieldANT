@@ -1,8 +1,8 @@
 //import Image from 'next/image'
 import Link from 'next/link'
 
-import Header from '../components/header.js';
-import Footer from '@/components/footer.js';
+import Header from '../components/header.jsx';
+import Footer from '@/components/footer.jsx';
 //import landingimage from "public/images/landing-image.png"
 
 export default function Home() {

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from "next/link";
 
-import Header from '../../components/header.js';
+import Header from '../../components/header.jsx';
 import Footer from '@/components/footer.js';
 
 
