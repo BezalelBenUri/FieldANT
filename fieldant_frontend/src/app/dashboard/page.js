@@ -21,7 +21,7 @@ const Dashboard = () => {
     <div className = "container mx-auto my-8">
       <h1 className = "text-3xl font-bold mb-4 text-indigo-700">Dashboard</h1>
 
-      <Link href = "dashboard/formpage">
+      <Link href = "dashboard/formpage/[link]" as  = "/dashboard/formpage/create">
         <div className = "bg-yellow-500 text-white py-2 px-4 rounded mb-4 inline-block hover:bg-indigo-700">
           Create Form
         </div>
@@ -29,7 +29,7 @@ const Dashboard = () => {
 
       <div className = "grid grid-cols-3 gap-4">
         {forms.map(form => (
-          <Link key = {form.link} href = {`/dashboard/formpage/form${form.link}`}>
+          <Link key = {form.link} href={`/dashboard/formpage/${form.link}`} as = {`/dashboard/formpage/${form.link}`}>
             <div className = "bg-white border p-4 rounded cursor-pointer hover:bg-gray-100">
               <h2 className = "text-lg font-bold mb-2 text-black">{form.name}</h2>
               <p className = "text-gray-600">{form.description}</p>
