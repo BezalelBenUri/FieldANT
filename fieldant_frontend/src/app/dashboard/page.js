@@ -29,7 +29,7 @@ const Dashboard = () => {
 
       <div className = "grid grid-cols-3 gap-4">
         {forms.map(form => (
-          <Link key = {form.id} href = {`/form/${form.id}`}>
+          <Link key = {form.link} href = {`/dashboard/formpage/form${form.link}`}>
             <div className = "bg-white border p-4 rounded cursor-pointer hover:bg-gray-100">
               <h2 className = "text-lg font-bold mb-2 text-black">{form.name}</h2>
               <p className = "text-gray-600">{form.description}</p>

@@ -2,7 +2,7 @@ from rest_framework import views, status, generics
 from rest_framework.response import Response
 import uuid
 
-from .serializers import FormSerializer
+from .serializers import FormSerializer, FormFieldsSerializer
 from .models import Form
 from .models import FormLink
 
@@ -13,6 +13,9 @@ class FormLinkView(views.APIView):
             form = form_link.form
         except FormLink.DoesNotExist:
             return Response({'error': 'Invalid link'}, status = status.HTTP_404_NOT_FOUND)
+        
+        serializer = FormFieldsSerializer(form)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
         # Implement logic to render the form and handle submissions
         # ...
