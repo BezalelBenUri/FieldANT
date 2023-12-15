@@ -40,7 +40,7 @@ class FormFieldsSerializer(serializers.ModelSerializer):
     """
     Serializer for Form model to convert data to JSON format, including nested Field objects and link.
     """
-    fields = FieldSerializer(many=True)
+    fields = FieldSerializer(many = True)
     link = serializers.SerializerMethodField()
 
     class Meta:
@@ -49,7 +49,7 @@ class FormFieldsSerializer(serializers.ModelSerializer):
 
     def get_link(self, obj):
         try:
-            form_link = FormLink.objects.get(form=obj)
+            form_link = FormLink.objects.get(form = obj)
             return form_link.link
         except FormLink.DoesNotExist:
             return None

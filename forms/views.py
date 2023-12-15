@@ -47,6 +47,7 @@ class FormRetrieveView(views.APIView):
         return Response(serializer.data, status = status.HTTP_200_OK)
     
 class FormListView(generics.ListAPIView):
-    queryset = Form.objects.all()
-    serializer_class = FormSerializer
+    serializer_class = FormFieldsSerializer  # Use the serializer that includes the link
+    def get_queryset(self):
+        return Form.objects.all()
 
