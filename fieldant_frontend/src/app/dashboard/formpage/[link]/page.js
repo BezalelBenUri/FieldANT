@@ -1,7 +1,11 @@
-'use client'
+// FormDetails.js
+'use client';
+import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import axios from 'axios';
+
 
 const FormDetails = () => {
   const router = useRouter();
@@ -20,7 +24,7 @@ const FormDetails = () => {
           console.error('Error fetching form data:', error);
         });
     }
-  }, [link]); // Make sure to include link in the dependency array
+  }, [link]);
 
   if (!link) {
     // Handle the case when link is not defined
@@ -32,15 +36,21 @@ const FormDetails = () => {
   }
 
   return (
-    <div className="container mx-auto my-8">
+    <div className = "container mx-auto my-8">
       {/* Render form details based on formData */}
-      <h1 className="text-3xl font-bold mb-4 text-indigo-700">Form Details</h1>
+      <h1 className = "text-3xl font-bold mb-4 text-indigo-700">Form Details</h1>
       {formData ? (
         <div>
-          {/* Render form details here */}
           <p>Form Name: {formData.name}</p>
           <p>Form Description: {formData.description}</p>
-          {/* Add more details as needed */}
+          {/* Render other details as needed */}
+          
+          {/* Link to fill out the form */}
+          <Link href = {`/dashboard/formpage/${formData.link}/fillForm/`} as = {`/dashboard/formpage/${formData.link}/fillForm/`}>
+            <div className = "bg-yellow-500 text-white py-2 px-4 rounded hover:bg-indigo-700">
+              Fill Form
+            </div>
+          </Link>
         </div>
       ) : (
         <div>
