@@ -15,7 +15,9 @@ class FormLinkView(views.APIView):
             return Response({'error': 'Invalid link'}, status = status.HTTP_404_NOT_FOUND)
         
         serializer = FormFieldsSerializer(form)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serialized_data = serializer.data
+        serialized_data['form_id'] = form.id
+        return Response(serialized_data, status = status.HTTP_200_OK)
 
         # Implement logic to render the form and handle submissions
         # ...
