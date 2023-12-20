@@ -59,11 +59,11 @@ const CreateForm = () => {
   };
 
   return (
-    <div className = "container min-h-screen flex-col flex-grow justify-between bg-white font-sans text-black">
+    <div className = "container min-w-full  min-h-screen flex-grow justify-between bg-white font-sans text-black">
       <main className = "flex flex-col items-center">
       <h1 className = "text-3xl fontbold mb-4">Create your form</h1>
       <form>
-        <div className = "mb-4">
+        <div className = "mb-4"> 
           <label htmlFor = "name" className = "block text-gray-700">
             Name of Form
           </label>

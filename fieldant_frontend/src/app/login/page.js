@@ -54,7 +54,7 @@ const CreateForm = () => {
 
   return (
     <div className="container mx-auto my-8">
-      <h1 className="text-3xl fontbold mb-4">Create your form</h1>
+      <h1 className = "text-3xl fontbold mb-4">Create your form</h1>
       <form>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700">

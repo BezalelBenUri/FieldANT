@@ -51,3 +51,22 @@ class FormListView(generics.ListAPIView):
     def get_queryset(self):
         return Form.objects.all()
 
+class FormSubmitView(views.APIView):
+    def post(self, request, link):
+        try:
+            form_link = FormLink.objects.get(link = link)
+            form = form_link.form
+        except FormLink.DoesNotExist:
+            return Response({'error': 'Invalid link'}, status = status.HTTP_404_NOT_FOUND)
+
+        serializer = FormSerializer(data = request.data)
+        if serializer.is_valid():
+            # Save form submission data
+            # This is a simple example; you may want to customize this part based on your form structure
+            form_data = serializer.validated_data.get('fields', [])
+            form_submission = {'form': form.id, 'data': form_data}
+            # Save form submission data to your database or perform other actions
+            # You can also associate the form submission with a user if you have user authentication
+
+            return Response({'message': 'Form submitted successfully'}, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

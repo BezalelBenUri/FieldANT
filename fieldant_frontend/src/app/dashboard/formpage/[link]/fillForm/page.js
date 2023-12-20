@@ -32,13 +32,24 @@ const FormFill = () => {
 
   const handleFormSubmit = async () => {
     try {
-      await axios.post(`http://localhost:8000/api/forms/link/${link}/submit/`, formResponses, {
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await axios.post(
+        `http://localhost:8000/api/forms/submit/${link}/`,
+        {
+          name: formData.name,
+          fields: formData.fields.map((field) => ({
+            name: field.name,
+            data_type: field.data_type,
+            value: formResponses[field.name] || '',
+          })),
         },
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       // Redirect to a thank you page or any other desired location
-      router.push('/thank-you');
+      router.push('/dashboard/formpage/thankYou/');
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -50,16 +61,16 @@ const FormFill = () => {
   }
 
   return (
-    <div className="container mx-auto my-8">
-      <h1 className="text-3xl font-bold mb-4 text-indigo-700">Fill out the Form</h1>
+    <div className = "container mx-auto my-8 bg flex flex-col justify-between font-sans text-gray-800">
+      <h1 className = "text-3xl font-bold mb-4 text-indigo-700">Fill out the Form</h1>
       <form>
         {formData.fields.map((field, index) => (
-          <div key = {index} className="mb-4">
-            <label htmlFor = {`field-${index}`} className = "block text-gray-700">
+          <div key = {index} className = "mb-4">
+            <label htmlFor = {`field-${index}`} className = " text-stone-50">
               {field.name}
             </label>
             <input
-              type={field.data_type === 'BOOLEAN' ? 'checkbox' : 'text'}
+              type = {field.data_type === 'BOOLEAN' ? 'checkbox' : 'text'}
               id = {`field-${index}`}
               name = {`field-${index}`}
               value = {formResponses[field.name] || ''}
